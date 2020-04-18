@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
+import Trending from "../components/Landing/Trending";
 import Promo from "../components/Landing/Promo";
 import { Tabs } from "../components/Tabs";
 import StickyBanner from "../components/StickyBanner";
@@ -28,11 +29,7 @@ const Landing = () => {
           size={"largest"}
         />
         <WeAre />
-        <Promo title="Whats trending " size={"xlarge"}>
-          <picture>
-            <img src={""} alt="What's trending" />
-          </picture>
-        </Promo>
+        <Trending />
         <Promo
           background={"/images/promo1"}
           backgroundLocale={true}
