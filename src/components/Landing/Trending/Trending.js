@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import Promo from "../Promo";
+import { getWhatsTrendingImage } from '../../../repositories/getWhatsTrendingImage';
 
 class Trending extends Component {
+
+  componentDidMount() {
+    getWhatsTrendingImage();
+  }
+
   render () {
     return (
       <Promo title="Whats trending " size={"xlarge"}>
