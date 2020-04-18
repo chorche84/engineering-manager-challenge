@@ -3,16 +3,22 @@ import Promo from "../Promo";
 import { getWhatsTrendingImage } from '../../../repositories/getWhatsTrendingImage';
 
 class Trending extends Component {
+  constructor (props) {
+    super(props);
+    this.state = { imageUrl: "" };
+  }
 
   componentDidMount() {
-    getWhatsTrendingImage();
+    getWhatsTrendingImage().then((imageUrl) => {
+      this.setState({ imageUrl });
+    });
   }
 
   render () {
     return (
       <Promo title="Whats trending " size={"xlarge"}>
         <picture>
-          <img src={""} alt="What's trending" />
+          <img src={this.state.imageUrl} alt="What's trending" />
         </picture>
       </Promo>
     );
