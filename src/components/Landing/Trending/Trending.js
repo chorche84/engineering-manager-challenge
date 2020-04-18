@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Promo from "../Promo";
+import LoadingSpinner from "../../LoadingSpinner";
 import { getWhatsTrendingImage } from '../../../repositories/getWhatsTrendingImage';
 
 class Trending extends Component {
   constructor (props) {
     super(props);
-    this.state = { imageUrl: "" };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -17,9 +18,14 @@ class Trending extends Component {
   render () {
     return (
       <Promo title="Whats trending " size={"xlarge"}>
-        <picture>
-          <img src={this.state.imageUrl} alt="What's trending" />
-        </picture>
+        { this.state.imageUrl ? (
+            <picture>
+              <img src={this.state.imageUrl} alt="What's trending" />
+            </picture>
+          ) : (
+            <LoadingSpinner />
+          )
+        }
       </Promo>
     );
   }
