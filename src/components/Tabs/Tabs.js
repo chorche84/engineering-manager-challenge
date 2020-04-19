@@ -14,15 +14,22 @@ async function calculateTabToShow(tab) {
   return tab;
 }
 
-const Tab = props => {
-  const { label, icon, size, className, onClick, isActive } = props;
-  return (
-    <TabStyled className={className} onClick={onClick} size={size} isActive={isActive}>
-      {icon && <IconStyled name={icon} isActive={isActive} />}
-      {label && <LabelStyled isActive={isActive} title={label}>{label}</LabelStyled>}
-    </TabStyled>
-  );
-};
+class Tab extends Component {
+  shouldComponentUpdate({ isActive }) {
+    return (isActive !== this.props.isActive);
+  }
+
+  render() {
+    const { label, icon, size, className, isActive, onClick } = this.props;
+
+    return (
+      <TabStyled className={className} onClick={onClick} size={size} isActive={isActive}>
+        {icon && <IconStyled name={icon} isActive={isActive} />}
+        {label && <LabelStyled isActive={isActive} title={label}>{label}</LabelStyled>}
+      </TabStyled>
+    );
+  }
+}
 
 class Tabs extends Component {
   constructor(props) {
@@ -37,7 +44,7 @@ class Tabs extends Component {
     this.setState({ loadingContent: true });
     this.setState({ selectedTab: await calculateTabToShow(index), loadingContent: false });
     this.props.onTabSelected && this.props.onTabSelected(tab);
-  };
+  }
 
   render() {
     const { layout, size } = this.props;
