@@ -5,10 +5,10 @@ it('returns the what\'s trending image from the server', (done) => {
 	const serviceResponse = {
 		text: jest.fn()
 	};
-	const servideResponsePromise = Promise.resolve(serviceResponse);
+	const serviceResponsePromise = Promise.resolve(serviceResponse);
 
 	jest.spyOn(window, 'fetch');
-	fetch.mockReturnValueOnce(servideResponsePromise);
+	fetch.mockReturnValueOnce(serviceResponsePromise);
 	serviceResponse.text.mockReturnValueOnce(trendingImageUrl);
 
 	const promiseResult = getWhatsTrendingImage();
