@@ -7,6 +7,7 @@ import {
   IconStyled,
   LabelStyled
 } from "./styles/Styled";
+import LoadingSpinner from "../LoadingSpinner";
 
 async function calculateTabToShow(tab) {
   await new Promise(resolve => setTimeout(resolve, 5000));
@@ -27,12 +28,14 @@ class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loadingContent: false,
       selectedTab: props.selectedTab || 0
     };
   }
 
   handleClick = async (tab, index) => {
-    this.setState({ selectedTab: await calculateTabToShow(index) });
+    this.setState({ loadingContent: true });
+    this.setState({ selectedTab: await calculateTabToShow(index), loadingContent: false });
     this.props.onTabSelected && this.props.onTabSelected(tab);
   };
 
@@ -53,7 +56,7 @@ class Tabs extends Component {
           ))}
         </TabListStyled>
         <TabContentContainerStyled>
-          <TabContent />
+          { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
         </TabContentContainerStyled>
       </TabsContainerStyled>
     );
