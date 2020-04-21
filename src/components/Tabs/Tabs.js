@@ -14,6 +14,21 @@ async function calculateTabToShow(tab) {
   return tab;
 }
 
+const getMemoizedTab = (() => {
+  const cache = {};
+
+  return async function (tab) {
+    if (cache[tab] !== undefined) {
+      return cache[tab];
+    } else {
+      const tabToShow = await calculateTabToShow(tab);
+      cache[tab] = tabToShow;
+
+      return tabToShow;
+    }
+  }
+})();
+
 class Tab extends Component {
   shouldComponentUpdate({ isActive }) {
     return (isActive !== this.props.isActive);
@@ -42,7 +57,9 @@ class Tabs extends Component {
 
   handleClick = async (tab, index) => {
     this.setState({ loadingContent: true });
-    this.setState({ selectedTab: await calculateTabToShow(index), loadingContent: false });
+
+    const selectedTab = await getMemoizedTab(index);
+    this.setState({ selectedTab, loadingContent: false });
     this.props.onTabSelected && this.props.onTabSelected(tab);
   }
 
