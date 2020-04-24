@@ -55,12 +55,16 @@ class Tabs extends Component {
     };
   }
 
-  handleClick = async (tab, index) => {
-    this.setState({ loadingContent: true });
-
+  selectTab = async (tab, index) => {
     const selectedTab = await getMemoizedTab(index);
+
     this.setState({ selectedTab, loadingContent: false });
     this.props.onTabSelected && this.props.onTabSelected(tab);
+  }
+
+  handleClick(tab, index) {
+    this.setState({ loadingContent: true });
+    this.selectTab(tab, index);
   }
 
   isTabActive(tabIndex) {
