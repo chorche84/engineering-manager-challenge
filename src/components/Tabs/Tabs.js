@@ -63,6 +63,10 @@ class Tabs extends Component {
     this.props.onTabSelected && this.props.onTabSelected(tab);
   }
 
+  isTabActive(tabIndex) {
+    return this.state.selectedTab === tabIndex;
+  }
+
   render() {
     const { layout, size } = this.props;
     const TabContent = () => layout[this.state.selectedTab].tabContent;
@@ -71,7 +75,7 @@ class Tabs extends Component {
         <TabListStyled size={size}>
           {layout.map((tab, index) => (
             <Tab
-              isActive={this.state.selectedTab === index}
+              isActive={this.isTabActive(index)}
               key={tab.tabTitle}
               label={tab.tabTitle}
               onClick={() => this.handleClick(tab, index)}
