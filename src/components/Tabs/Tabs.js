@@ -64,7 +64,9 @@ class Tabs extends Component {
   }
 
   isTabActive(tabIndex) {
-    return this.state.selectedTab === tabIndex;
+    const { loadingContent, selectedTab } = this.state;
+
+    return !loadingContent && (selectedTab === tabIndex);
   }
 
   render() {
