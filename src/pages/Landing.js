@@ -19,9 +19,13 @@ const tabsLayout = () => [
 ];
 
 const Landing = () => {
+  function onToggleMiniModeClicked () {
+    console.log('onToggleMiniModeClicked');
+  }
+
   return (
     <>
-      <Layout>
+      <Layout onToggleMiniModeClicked={onToggleMiniModeClicked}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"

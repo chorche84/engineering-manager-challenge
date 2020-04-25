@@ -21,8 +21,9 @@ function getLanguageSelectorItems() {
   ];
 }
 
-function Header() {
+function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const { onToggleMiniModeClicked } = props;
 
   useEffect(() => {
     document.body.classList.toggle("noScrolling", isBurgerMenuOpen);
@@ -52,7 +53,8 @@ function Header() {
             toggleMiniMode: {
               text: "Toggle Mini Mode",
               url: "#",
-              role: "button"
+              role: "button",
+              onClick: onToggleMiniModeClicked
             }
           }}
           link
