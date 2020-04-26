@@ -4,23 +4,6 @@ import Menu from "../Menu";
 import { Logo } from "../Logo";
 import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
 
-function getLanguageSelectorItems() {
-  return [
-    {
-      content: "English",
-      value: "en"
-    },
-    {
-      content: "العربية",
-      value: "ar"
-    },
-    {
-      content: "Français",
-      value: "fr"
-    }
-  ];
-}
-
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { onToggleMiniModeClicked } = props;
@@ -33,37 +16,58 @@ function Header(props) {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
   }
 
+  const data = {
+    label: "Menu",
+    list: {
+      explore: {
+        text: "Explore",
+        url: "#",
+        role: "link"
+      },
+      toggleMiniMode: {
+        text: "Toggle Mini Mode",
+        url: "#",
+        role: "button",
+        onClick: onToggleMiniModeClicked
+      }
+    },
+    dropDown: {
+      items:[
+        {
+          content: "English",
+          value: "en"
+        },
+        {
+          content: "العربية",
+          value: "ar"
+        },
+        {
+          content: "Français",
+          value: "fr"
+        }
+      ],
+      selectedItem: 0,
+      icon: "languageGlobe",
+      optionsPosition: "center"
+    }
+  }
+
   return (
     <HeaderStyled>
       <BurgerStyled
         isOpened={isBurgerMenuOpen}
         onClick={handleOpened}
-        ariaLabel="Menu"
+        ariaLabel={data.label}
       />
       <Menu isOpened={isBurgerMenuOpen} />
       <Logo />
       <nav>
-        <ListStyled
-          data={{
-            explore: {
-              text: "Explore",
-              url: "#",
-              role: "link"
-            },
-            toggleMiniMode: {
-              text: "Toggle Mini Mode",
-              url: "#",
-              role: "button",
-              onClick: onToggleMiniModeClicked
-            }
-          }}
-          link
-        />
+        <ListStyled data={data.list} link/>
         <Dropdown
-          items={getLanguageSelectorItems()}
-          icon={"languageGlobe"}
-          optionsPosition={"center"}
-          selectedItem={0}
+          items={data.dropDown.items}
+          icon={data.dropDown.icon}
+          optionsPosition={data.dropDown.optionsPosition}
+          selectedItem={data.dropDown.selectedItem}
         />
       </nav>
     </HeaderStyled>
