@@ -5,36 +5,53 @@ import {
   StickyBannerStyled
 } from "./styles/Styled";
 
+const data = {
+  heading: {
+    rank: 5,
+    size: "default"
+  },
+  buttons: [{
+    label: "Email",
+    icon: "email",
+    buttonType: "secondary",
+    ariaLabel: "Email"
+  }, {
+    label: "Mobile",
+    icon: "phone",
+    buttonType: "primary",
+    ariaLabel: "Mobile"
+  }, {
+    label: "Facebook",
+    icon: "facebook",
+    buttonType: "primary",
+    ariaLabel: "Facebook",
+    backgroundColor: "#4760a0"
+  }]
+};
+
 function StickyBanner({ className, title }) {
+  const { heading, buttons } = data;
+
   return (
     <StickyBannerStyled className={className}>
       {title && (
         <HeadingStyled
-          rank={5}
+          rank={heading.rank}
           text={title}
-          size="default"
+          size={heading.size}
           ariaLabelledby={title}
         />
       )}
-      <ButtonStyled
-        label="Email"
-        icon="email"
-        buttonType="secondary"
-        ariaLabel="Email"
-      />
-      <ButtonStyled
-        label="Mobile"
-        icon="phone"
-        buttonType="primary"
-        ariaLabel="Mobile"
-      />
-      <ButtonStyled
-        label="Facebook"
-        icon="facebook"
-        buttonType={"primary"}
-        backgroundColor={"#4760a0"}
-        ariaLabel="Facebook"
-      />
+
+      {buttons.map(button => (
+        <ButtonStyled
+          label={button.label}
+          icon={button.icon}
+          buttonType={button.buttonType}
+          backgroundColor={button.backgroundColor}
+          ariaLabel={button.ariaLabel}
+        />
+      ))}
     </StickyBannerStyled>
   );
 }
