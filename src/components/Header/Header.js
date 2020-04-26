@@ -27,12 +27,15 @@ function Header(props) {
       <Logo />
       <nav>
         <ListStyled data={data.list} link/>
-        <Dropdown
-          items={data.dropDown.items}
-          icon={data.dropDown.icon}
-          optionsPosition={data.dropDown.optionsPosition}
-          selectedItem={data.dropDown.selectedItem}
-        />
+        {
+          data.dropDown &&
+          (<Dropdown
+            items={data.dropDown.items}
+            icon={data.dropDown.icon}
+            optionsPosition={data.dropDown.optionsPosition}
+            selectedItem={data.dropDown.selectedItem}
+          />)
+        }
       </nav>
     </HeaderStyled>
   );

@@ -58,35 +58,11 @@ const miniModeData = {
   header: {
     label: "Menu",
     list: {
-      explore: {
-        text: "Explore",
-        url: "#",
-        role: "link"
-      },
       toggleMiniMode: {
         text: "Toggle Mini Mode",
         url: "#",
         role: "button"
       }
-    },
-    dropDown: {
-      items:[
-        {
-          content: "English",
-          value: "en"
-        },
-        {
-          content: "العربية",
-          value: "ar"
-        },
-        {
-          content: "Français",
-          value: "fr"
-        }
-      ],
-      selectedItem: 0,
-      icon: "languageGlobe",
-      optionsPosition: "center"
     }
   },
   tabsLayout: () => [
