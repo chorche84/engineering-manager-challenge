@@ -6,7 +6,7 @@ import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
 
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const { onToggleMiniModeClicked } = props;
+  const { data } = props;
 
   useEffect(() => {
     document.body.classList.toggle("noScrolling", isBurgerMenuOpen);
@@ -14,42 +14,6 @@ function Header(props) {
 
   function handleOpened() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-  }
-
-  const data = {
-    label: "Menu",
-    list: {
-      explore: {
-        text: "Explore",
-        url: "#",
-        role: "link"
-      },
-      toggleMiniMode: {
-        text: "Toggle Mini Mode",
-        url: "#",
-        role: "button",
-        onClick: onToggleMiniModeClicked
-      }
-    },
-    dropDown: {
-      items:[
-        {
-          content: "English",
-          value: "en"
-        },
-        {
-          content: "العربية",
-          value: "ar"
-        },
-        {
-          content: "Français",
-          value: "fr"
-        }
-      ],
-      selectedItem: 0,
-      icon: "languageGlobe",
-      optionsPosition: "center"
-    }
   }
 
   return (

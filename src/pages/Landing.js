@@ -13,6 +13,40 @@ import {
 } from "../components/Landing/Tabs";
 
 const fullLandingData = {
+  header: {
+    label: "Menu",
+    list: {
+      explore: {
+        text: "Explore",
+        url: "#",
+        role: "link"
+      },
+      toggleMiniMode: {
+        text: "Toggle Mini Mode",
+        url: "#",
+        role: "button"
+      }
+    },
+    dropDown: {
+      items:[
+        {
+          content: "English",
+          value: "en"
+        },
+        {
+          content: "العربية",
+          value: "ar"
+        },
+        {
+          content: "Français",
+          value: "fr"
+        }
+      ],
+      selectedItem: 0,
+      icon: "languageGlobe",
+      optionsPosition: "center"
+    }
+  },
   tabsLayout: () => [
     { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
     { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
@@ -21,6 +55,40 @@ const fullLandingData = {
 };
 
 const miniModeData = {
+  header: {
+    label: "Menu",
+    list: {
+      explore: {
+        text: "Explore",
+        url: "#",
+        role: "link"
+      },
+      toggleMiniMode: {
+        text: "Toggle Mini Mode",
+        url: "#",
+        role: "button"
+      }
+    },
+    dropDown: {
+      items:[
+        {
+          content: "English",
+          value: "en"
+        },
+        {
+          content: "العربية",
+          value: "ar"
+        },
+        {
+          content: "Français",
+          value: "fr"
+        }
+      ],
+      selectedItem: 0,
+      icon: "languageGlobe",
+      optionsPosition: "center"
+    }
+  },
   tabsLayout: () => [
     { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
     { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
@@ -35,11 +103,18 @@ const Landing = () => {
     setMiniMode(!miniModeActive);
   }
 
-  const data = miniModeActive ? miniModeData : fullLandingData;
+  function getData () {
+    const modeData = miniModeActive ? miniModeData : fullLandingData;
+    modeData.header.list.toggleMiniMode.onClick = toggleMiniMode;
+
+    return modeData;
+  }
+
+  const data = getData();
 
   return (
     <>
-      <Layout onToggleMiniModeClicked={() => toggleMiniMode()}>
+      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} headerData={data.header}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"

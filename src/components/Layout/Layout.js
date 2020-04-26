@@ -4,7 +4,7 @@ import Footer from "../Footer";
 
 const Main = props => (
   <main>
-    <Header onToggleMiniModeClicked={props.onToggleMiniModeClicked} />
+    <Header data={props.headerData} />
     {props.children}
     <Footer />
   </main>
