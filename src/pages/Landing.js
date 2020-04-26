@@ -51,7 +51,36 @@ const fullLandingData = {
     { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
     { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
     { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-  ]
+  ],
+  stickyBanner: {
+    heading: {
+      title: "Start your free trial. Sign up with:",
+      rank: 5,
+      size: "default"
+    },
+    mobileHeading: {
+      title: "Signup",
+      rank: 5,
+      size: "default"
+    },
+    buttons: [{
+      label: "Email",
+      icon: "email",
+      buttonType: "secondary",
+      ariaLabel: "Email"
+    }, {
+      label: "Mobile",
+      icon: "phone",
+      buttonType: "primary",
+      ariaLabel: "Mobile"
+    }, {
+      label: "Facebook",
+      icon: "facebook",
+      buttonType: "primary",
+      ariaLabel: "Facebook",
+      backgroundColor: "#4760a0"
+    }]
+  }
 };
 
 const miniModeData = {
@@ -68,7 +97,36 @@ const miniModeData = {
   tabsLayout: () => [
     { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
     { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-  ]
+  ],
+  stickyBanner: {
+    heading: {
+      title: "Start your free trial. Sign up with:",
+      rank: 5,
+      size: "default"
+    },
+    mobileHeading: {
+      title: "Signup",
+      rank: 5,
+      size: "default"
+    },
+    buttons: [{
+      label: "Email",
+      icon: "email",
+      buttonType: "secondary",
+      ariaLabel: "Email"
+    }, {
+      label: "Mobile",
+      icon: "phone",
+      buttonType: "primary",
+      ariaLabel: "Mobile"
+    }, {
+      label: "Facebook",
+      icon: "facebook",
+      buttonType: "primary",
+      ariaLabel: "Facebook",
+      backgroundColor: "#4760a0"
+    }]
+  }
 };
 
 const Landing = () => {
@@ -90,7 +148,7 @@ const Landing = () => {
 
   return (
     <>
-      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header}>
+      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header} stickyBanner={data.stickyBanner}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"
@@ -113,7 +171,7 @@ const Landing = () => {
         />
         <Tabs layout={data.tabsLayout()} />
       </Layout>
-      <StickyBanner title="Start your free trial. Sign up with:" />
+      <StickyBanner heading={data.stickyBanner.heading} buttons={data.stickyBanner.buttons}/>
     </>
   );
 };
