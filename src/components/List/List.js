@@ -13,6 +13,41 @@ const TypeList = {
   ul: UlStyled
 };
 
+const DescriptionListItem = (props) => {
+  const { data, separator, display, key } = props;
+
+  return (
+    <React.Fragment key={key}>
+      <DtStyled display={display}>
+        {key}
+        {separator}
+      </DtStyled>
+      <DdStyled display={display}>{data}</DdStyled>
+    </React.Fragment>
+  );
+}
+
+const ListItem = (props) => {
+  const { data, link, display, key } = props;
+
+  return (
+    <LiStyled key={key} display={display}>
+      {link ? (
+        <a
+          href={data.url || ""}
+          role={data.role || ""}
+          title={data.title || ""}
+          onClick={data.onClick}
+        >
+          {data.text || ""}
+        </a>
+      ) : (
+        data
+      )}
+    </LiStyled>
+  );
+}
+
 const List = ({
   className,
   data,
@@ -33,29 +68,10 @@ const List = ({
     >
       {type === "dl" || display === "block"
         ? Object.keys(data).map(item => (
-            <React.Fragment key={item}>
-              <DtStyled display={display}>
-                {item}
-                {separator}
-              </DtStyled>
-              <DdStyled display={display}>{data[item]}</DdStyled>
-            </React.Fragment>
+            <DescriptionListItem key={item} display={display} data={data[item]} separator={separator} />
           ))
         : Object.keys(data).map(item => (
-            <LiStyled key={item} display={display}>
-              {link ? (
-                <a
-                  href={data[item].url || ""}
-                  role={data[item].role || ""}
-                  title={data[item].title || ""}
-                  onClick={data[item].onClick}
-                >
-                  {data[item].text || ""}
-                </a>
-              ) : (
-                data[item]
-              )}
-            </LiStyled>
+            <ListItem key={item} display={display} data={data[item]} link={link} />
           ))}
     </ListComponent>
   );
