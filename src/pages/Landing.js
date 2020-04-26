@@ -90,7 +90,7 @@ const Landing = () => {
 
   return (
     <>
-      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} headerData={data.header}>
+      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"

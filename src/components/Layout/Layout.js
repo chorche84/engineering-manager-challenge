@@ -4,7 +4,7 @@ import Footer from "../Footer";
 
 const Main = props => (
   <main>
-    <Header data={props.headerData} />
+    <Header label={props.header.label} list={props.header.list} dropDown={props.header.dropDown}/>
     {props.children}
     <Footer />
   </main>

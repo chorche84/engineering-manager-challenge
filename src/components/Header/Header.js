@@ -6,7 +6,7 @@ import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
 
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const { data } = props;
+  const { dropDown, list, label } = props;
 
   useEffect(() => {
     document.body.classList.toggle("noScrolling", isBurgerMenuOpen);
@@ -21,19 +21,19 @@ function Header(props) {
       <BurgerStyled
         isOpened={isBurgerMenuOpen}
         onClick={handleOpened}
-        ariaLabel={data.label}
+        ariaLabel={label}
       />
       <Menu isOpened={isBurgerMenuOpen} />
       <Logo />
       <nav>
-        <ListStyled data={data.list} link/>
+        <ListStyled data={list} link/>
         {
-          data.dropDown &&
+          dropDown &&
           (<Dropdown
-            items={data.dropDown.items}
-            icon={data.dropDown.icon}
-            optionsPosition={data.dropDown.optionsPosition}
-            selectedItem={data.dropDown.selectedItem}
+            items={dropDown.items}
+            icon={dropDown.icon}
+            optionsPosition={dropDown.optionsPosition}
+            selectedItem={dropDown.selectedItem}
           />)
         }
       </nav>
