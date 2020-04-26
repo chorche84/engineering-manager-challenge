@@ -73,9 +73,13 @@ class Tabs extends Component {
     return !loadingContent && (selectedTab === tabIndex);
   }
 
+  getSelectedTab(layout) {
+    return layout[this.state.selectedTab] || layout[0];
+  }
+
   render() {
     const { layout, size } = this.props;
-    const TabContent = () => layout[this.state.selectedTab].tabContent;
+    const TabContent = () => this.getSelectedTab(layout).tabContent;
     return (
       <TabsContainerStyled>
         <TabListStyled size={size}>
