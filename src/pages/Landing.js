@@ -80,6 +80,9 @@ const fullLandingData = {
       ariaLabel: "Facebook",
       backgroundColor: "#4760a0"
     }]
+  },
+  footer: {
+    showMiniMode: false
   }
 };
 
@@ -119,13 +122,10 @@ const miniModeData = {
       icon: "phone",
       buttonType: "primary",
       ariaLabel: "Mobile"
-    }, {
-      label: "Facebook",
-      icon: "facebook",
-      buttonType: "primary",
-      ariaLabel: "Facebook",
-      backgroundColor: "#4760a0"
     }]
+  },
+  footer: {
+    showMiniMode: true
   }
 };
 
@@ -148,7 +148,7 @@ const Landing = () => {
 
   return (
     <>
-      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header} stickyBanner={data.stickyBanner}>
+      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header} stickyBanner={data.stickyBanner} footer={data.footer}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"
