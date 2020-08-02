@@ -29,12 +29,7 @@ function Header(props) {
         <ListStyled data={list} link/>
         {
           dropDown &&
-          (<Dropdown
-            items={dropDown.items}
-            icon={dropDown.icon}
-            optionsPosition={dropDown.optionsPosition}
-            selectedItem={dropDown.selectedItem}
-          />)
+          (<Dropdown {...dropDown}/>)
         }
       </nav>
     </HeaderStyled>
