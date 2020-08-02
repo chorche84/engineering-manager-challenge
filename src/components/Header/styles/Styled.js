@@ -37,3 +37,8 @@ export const ListStyled = styled(List)`
     display: block;
   `}
 `;
+
+export const EmptyDropdownStyled = styled.div`
+  width: 80px;
+  height: 36px;
+`;
