@@ -109,9 +109,6 @@ const data = {
         ariaLabel: "Mobile"
       }]
     }
-  },
-  footer: {
-    showMiniMode: false
   }
 };
 
