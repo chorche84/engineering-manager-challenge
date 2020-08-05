@@ -57,18 +57,16 @@ const data = {
       optionsPosition: "center"
     }
   },
-  tabsLayout: () => {
-    return {
-      full: [
-        { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-        { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
-        { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-      ],
-      mini: [
-        { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-        { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-      ]
-    }
+  tabsLayout: {
+    full: [
+      { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
+      { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
+      { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
+    ],
+    mini: [
+      { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
+      { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
+    ]
   },
   stickyBanner: {
     heading: {
@@ -141,7 +139,7 @@ const Landing = () => {
           text="Get <strong>thousands</strong> of titles in your pocket"
           direction="start"
         />
-        <Tabs layout={data.tabsLayout()} />
+        <Tabs layout={data.tabsLayout} />
       </Layout>
       <StickyBanner heading={data.stickyBanner.heading} buttons={data.stickyBanner.buttons}/>
     </MiniModeProvider>
