@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { MiniModeConsumer } from "../../context/MiniMode";
 import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
@@ -16,28 +17,47 @@ function Header(props) {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
   }
 
-  function showDropdown (dropDown) {
-    if (dropDown) {
-      return <Dropdown {...dropDown}/>;
-    } else {
+  function adaptList(list, minimode) {
+    const adaptedList = minimode.active ? list.mini : list.full;
+
+    if (adaptedList.toggleMiniMode) {
+      adaptedList.toggleMiniMode.onClick = minimode.toggle;
+    }
+
+    return adaptedList;
+  }
+
+  function showList(list, minimode) {
+    const adaptedList = adaptList(list, minimode);
+    return (<ListStyled data={adaptedList} link/>);
+  }
+
+  function showDropdown (dropDown, miniModeActive) {
+    if (miniModeActive) {
       return <EmptyDropdownStyled />;
+    } else {
+      return <Dropdown {...dropDown}/>;
     }
   }
 
   return (
-    <HeaderStyled>
-      <BurgerStyled
-        isOpened={isBurgerMenuOpen}
-        onClick={handleOpened}
-        ariaLabel={label}
-      />
-      <Menu isOpened={isBurgerMenuOpen}  stickyBanner={stickyBanner}/>
-      <Logo />
-      <nav>
-        <ListStyled data={list} link/>
-        { showDropdown(dropDown) }
-      </nav>
-    </HeaderStyled>
+    <MiniModeConsumer>
+      { miniMode => (
+        <HeaderStyled>
+          <BurgerStyled
+            isOpened={isBurgerMenuOpen}
+            onClick={handleOpened}
+            ariaLabel={label}
+          />
+          <Menu isOpened={isBurgerMenuOpen}  stickyBanner={stickyBanner}/>
+          <Logo />
+          <nav>
+            { showList(list, miniMode) }
+            { showDropdown(dropDown, miniMode.active) }
+          </nav>
+        </HeaderStyled>
+      )}
+    </MiniModeConsumer>
   );
 }
 

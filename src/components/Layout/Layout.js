@@ -6,7 +6,7 @@ const Main = props => (
   <main>
     <Header label={props.header.label} list={props.header.list} dropDown={props.header.dropDown} stickyBanner={props.stickyBanner}/>
     {props.children}
-    <Footer {...props.footer} />
+    <Footer/>
   </main>
 );
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MiniModeProvider } from "../context/MiniMode";
 import Layout from "../components/Layout";
 import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
@@ -12,19 +13,28 @@ import {
   TabDownload as Tab3
 } from "../components/Landing/Tabs";
 
-const fullLandingData = {
+const data = {
   header: {
     label: "Menu",
     list: {
-      explore: {
-        text: "Explore",
-        url: "#",
-        role: "link"
+      full: {
+        explore: {
+          text: "Explore",
+          url: "#",
+          role: "link"
+        },
+        toggleMiniMode: {
+          text: "Toggle Mini Mode",
+          url: "#",
+          role: "button"
+        }
       },
-      toggleMiniMode: {
-        text: "Toggle Mini Mode",
-        url: "#",
-        role: "button"
+      mini: {
+        toggleMiniMode: {
+          text: "Toggle Mini Mode",
+          url: "#",
+          role: "button"
+        }
       }
     },
     dropDown: {
@@ -47,11 +57,19 @@ const fullLandingData = {
       optionsPosition: "center"
     }
   },
-  tabsLayout: () => [
-    { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-    { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
-    { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-  ],
+  tabsLayout: () => {
+    return {
+      full: [
+        { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
+        { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
+        { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
+      ],
+      mini: [
+        { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
+        { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
+      ]
+    }
+  },
   stickyBanner: {
     heading: {
       title: "Start your free trial. Sign up with:",
@@ -63,92 +81,46 @@ const fullLandingData = {
       rank: 5,
       size: "default"
     },
-    buttons: [{
-      label: "Email",
-      icon: "email",
-      buttonType: "secondary",
-      ariaLabel: "Email"
-    }, {
-      label: "Mobile",
-      icon: "phone",
-      buttonType: "primary",
-      ariaLabel: "Mobile"
-    }, {
-      label: "Facebook",
-      icon: "facebook",
-      buttonType: "primary",
-      ariaLabel: "Facebook",
-      backgroundColor: "#4760a0"
-    }]
+    buttons: {
+      full: [{
+        label: "Email",
+        icon: "email",
+        buttonType: "secondary",
+        ariaLabel: "Email"
+      }, {
+        label: "Mobile",
+        icon: "phone",
+        buttonType: "primary",
+        ariaLabel: "Mobile"
+      }, {
+        label: "Facebook",
+        icon: "facebook",
+        buttonType: "primary",
+        ariaLabel: "Facebook",
+        backgroundColor: "#4760a0"
+      }],
+      mini: [{
+        label: "Email",
+        icon: "email",
+        buttonType: "secondary",
+        ariaLabel: "Email"
+      }, {
+        label: "Mobile",
+        icon: "phone",
+        buttonType: "primary",
+        ariaLabel: "Mobile"
+      }]
+    }
   },
   footer: {
     showMiniMode: false
   }
 };
 
-const miniModeData = {
-  header: {
-    label: "Menu",
-    list: {
-      toggleMiniMode: {
-        text: "Toggle Mini Mode",
-        url: "#",
-        role: "button"
-      }
-    }
-  },
-  tabsLayout: () => [
-    { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-    { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-  ],
-  stickyBanner: {
-    heading: {
-      title: "Start your free trial. Sign up with:",
-      rank: 5,
-      size: "default"
-    },
-    mobileHeading: {
-      title: "Signup",
-      rank: 5,
-      size: "default"
-    },
-    buttons: [{
-      label: "Email",
-      icon: "email",
-      buttonType: "secondary",
-      ariaLabel: "Email"
-    }, {
-      label: "Mobile",
-      icon: "phone",
-      buttonType: "primary",
-      ariaLabel: "Mobile"
-    }]
-  },
-  footer: {
-    showMiniMode: true
-  }
-};
-
 const Landing = () => {
-
-  const [miniModeActive, setMiniMode] = useState(false);
-
-  function toggleMiniMode () {
-    setMiniMode(!miniModeActive);
-  }
-
-  function getData () {
-    const modeData = miniModeActive ? miniModeData : fullLandingData;
-    modeData.header.list.toggleMiniMode.onClick = toggleMiniMode;
-
-    return modeData;
-  }
-
-  const data = getData();
-
   return (
-    <>
-      <Layout onToggleMiniModeClicked={() => toggleMiniMode()} header={data.header} stickyBanner={data.stickyBanner} footer={data.footer}>
+    <MiniModeProvider>
+      <Layout header={data.header} stickyBanner={data.stickyBanner}>
         <Hero
           background={"/images/starzplay_covers"}
           heroTitle="Imagine the best entertainment all in one place"
@@ -172,7 +144,7 @@ const Landing = () => {
         <Tabs layout={data.tabsLayout()} />
       </Layout>
       <StickyBanner heading={data.stickyBanner.heading} buttons={data.stickyBanner.buttons}/>
-    </>
+    </MiniModeProvider>
   );
 };
 

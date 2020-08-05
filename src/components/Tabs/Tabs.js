@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { MiniModeConsumer } from "../../context/MiniMode";
 import {
   TabsContainerStyled,
   TabListStyled,
@@ -77,9 +78,9 @@ class Tabs extends Component {
     return layout[this.state.selectedTab] || layout[0];
   }
 
-  render() {
-    const { layout, size } = this.props;
+  renderTabs(layout, size) {
     const TabContent = () => this.getSelectedTab(layout).tabContent;
+
     return (
       <TabsContainerStyled>
         <TabListStyled size={size}>
@@ -97,6 +98,21 @@ class Tabs extends Component {
           { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
         </TabContentContainerStyled>
       </TabsContainerStyled>
+    );
+  }
+
+  render() {
+    const { layout, size } = this.props;
+    return (
+      <MiniModeConsumer>
+        {
+          miniMode => {
+            const selectedLayout = miniMode.active ? layout.mini : layout.full;
+
+            return this.renderTabs(selectedLayout, size)
+          }
+        }
+      </MiniModeConsumer>
     );
   }
 }

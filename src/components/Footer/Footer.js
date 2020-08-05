@@ -1,8 +1,9 @@
 import React from "react";
+import { MiniModeConsumer } from "../../context/MiniMode";
 import FooterNav from "../FooterNav";
 import { FooterStyled, LogoStyled, AppLogosStyled } from "./styles/Styled";
 
-function Footer({ showMiniMode }) {
+function Footer() {
   const currentYear = new Date().getFullYear();
 
   function showAppLogos (showMiniMode) {
@@ -12,14 +13,20 @@ function Footer({ showMiniMode }) {
   }
 
   return (
-    <FooterStyled>
-      <FooterNav />
-      { showAppLogos(showMiniMode) }
-      <div>
-        <small>© {currentYear}</small>
-        <LogoStyled />
-      </div>
-    </FooterStyled>
+    <MiniModeConsumer>
+      {
+        miniMode => (
+          <FooterStyled>
+            <FooterNav />
+            { showAppLogos(miniMode.active) }
+            <div>
+              <small>© {currentYear}</small>
+              <LogoStyled />
+            </div>
+          </FooterStyled>
+        )
+      }
+    </MiniModeConsumer>
   );
 }
 
