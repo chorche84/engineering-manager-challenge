@@ -74,43 +74,39 @@ class Tabs extends Component {
     return !loadingContent && (selectedTab === tabIndex);
   }
 
+  isTabVisible(tab, miniMode) {
+    return !miniMode.active || tab.visibleInMiniMode;
+  }
+
   getSelectedTab(layout) {
     return layout[this.state.selectedTab] || layout[0];
   }
 
-  renderTabs(layout, size) {
+  render() {
+    const { layout, size } = this.props;
     const TabContent = () => this.getSelectedTab(layout).tabContent;
 
     return (
-      <TabsContainerStyled>
-        <TabListStyled size={size}>
-          {layout.map((tab, index) => (
-            <Tab
-              isActive={this.isTabActive(index)}
-              key={tab.tabTitle}
-              label={tab.tabTitle}
-              onClick={() => this.handleClick(tab, index)}
-              icon={tab.tabIcon}
-            />
-          ))}
-        </TabListStyled>
-        <TabContentContainerStyled>
-          { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
-        </TabContentContainerStyled>
-      </TabsContainerStyled>
-    );
-  }
-
-  render() {
-    const { layout, size } = this.props;
-    return (
       <MiniModeConsumer>
         {
-          miniMode => {
-            const selectedLayout = miniMode.active ? layout.mini : layout.full;
-
-            return this.renderTabs(selectedLayout, size)
-          }
+          miniMode => (
+            <TabsContainerStyled>
+              <TabListStyled size={size}>
+                {layout.map((tab, index) => this.isTabVisible(tab, miniMode) && (
+                  <Tab
+                    isActive={this.isTabActive(index)}
+                    key={tab.tabTitle}
+                    label={tab.tabTitle}
+                    onClick={() => this.handleClick(tab, index)}
+                    icon={tab.tabIcon}
+                  />
+                ))}
+              </TabListStyled>
+              <TabContentContainerStyled>
+                { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
+              </TabContentContainerStyled>
+            </TabsContainerStyled>
+          )
         }
       </MiniModeConsumer>
     );

@@ -58,17 +58,11 @@ const data = {
       optionsPosition: "center"
     }
   },
-  tabsLayout: {
-    full: [
-      { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-      { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
-      { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-    ],
-    mini: [
-      { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-      { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-    ]
-  },
+  tabsLayout: [
+    { tabTitle: "Subscription", tabIcon: "user", visibleInMiniMode: true, tabContent: <Tab1 /> },
+    { tabTitle: "Devices", tabIcon: "devices", visibleInMiniMode: false, tabContent: <Tab2 /> },
+    { tabTitle: "Download", tabIcon: "download", visibleInMiniMode: true, tabContent: <Tab3 /> }
+  ],
   stickyBanner: {
     heading: {
       title: "Start your free trial. Sign up with:",
