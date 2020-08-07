@@ -18,11 +18,11 @@ async function calculateTabToShow(tab) {
 const getMemoizedTab = (() => {
   const cache = {};
 
-  return async function (tab) {
+  return function (tab) {
     if (cache[tab] !== undefined) {
       return cache[tab];
     } else {
-      const tabToShow = await calculateTabToShow(tab);
+      const tabToShow = calculateTabToShow(tab);
       cache[tab] = tabToShow;
 
       return tabToShow;
