@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { MiniModeConsumer } from "../../context/MiniMode";
 import {
   TabsContainerStyled,
   TabListStyled,
@@ -74,8 +73,8 @@ class Tabs extends Component {
     return !loadingContent && (selectedTab === tabIndex);
   }
 
-  isTabVisible(tab, miniMode) {
-    return !miniMode.active || tab.visibleInMiniMode;
+  isTabVisible(tab, miniModeActive) {
+    return !miniModeActive || tab.visibleInMiniMode;
   }
 
   getSelectedTab(layout) {
@@ -83,32 +82,26 @@ class Tabs extends Component {
   }
 
   render() {
-    const { layout, size } = this.props;
+    const { layout, size, miniModeActive } = this.props;
     const TabContent = () => this.getSelectedTab(layout).tabContent;
 
     return (
-      <MiniModeConsumer>
-        {
-          miniMode => (
-            <TabsContainerStyled>
-              <TabListStyled size={size}>
-                {layout.map((tab, index) => this.isTabVisible(tab, miniMode) && (
-                  <Tab
-                    isActive={this.isTabActive(index)}
-                    key={tab.tabTitle}
-                    label={tab.tabTitle}
-                    onClick={() => this.handleClick(tab, index)}
-                    icon={tab.tabIcon}
-                  />
-                ))}
-              </TabListStyled>
-              <TabContentContainerStyled>
-                { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
-              </TabContentContainerStyled>
-            </TabsContainerStyled>
-          )
-        }
-      </MiniModeConsumer>
+      <TabsContainerStyled>
+        <TabListStyled size={size}>
+          {layout.map((tab, index) => this.isTabVisible(tab, miniModeActive) && (
+            <Tab
+              isActive={this.isTabActive(index)}
+              key={tab.tabTitle}
+              label={tab.tabTitle}
+              onClick={() => this.handleClick(tab, index)}
+              icon={tab.tabIcon}
+            />
+          ))}
+        </TabListStyled>
+        <TabContentContainerStyled>
+          { this.state.loadingContent ? (<LoadingSpinner />) : (<TabContent />) }
+        </TabContentContainerStyled>
+      </TabsContainerStyled>
     );
   }
 }

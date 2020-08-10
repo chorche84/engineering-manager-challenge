@@ -6,13 +6,8 @@ import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
 import Trending from "../components/Landing/Trending";
 import Promo from "../components/Landing/Promo";
-import { Tabs } from "../components/Tabs";
 import StickyBanner from "../components/StickyBanner";
-import {
-  TabUser as Tab1,
-  TabDevices as Tab2,
-  TabDownload as Tab3
-} from "../components/Landing/Tabs";
+import { LandingTabs } from "../components/Landing/Tabs";
 
 const data = {
   header: {
@@ -58,11 +53,6 @@ const data = {
       optionsPosition: "center"
     }
   },
-  tabsLayout: [
-    { tabTitle: "Subscription", tabIcon: "user", visibleInMiniMode: true, tabContent: <Tab1 /> },
-    { tabTitle: "Devices", tabIcon: "devices", visibleInMiniMode: false, tabContent: <Tab2 /> },
-    { tabTitle: "Download", tabIcon: "download", visibleInMiniMode: true, tabContent: <Tab3 /> }
-  ],
   stickyBanner: {
     heading: {
       title: "Start your free trial. Sign up with:",
@@ -131,7 +121,7 @@ const Landing = () => {
         text="Get <strong>thousands</strong> of titles in your pocket"
         direction="start"
       />
-      <Tabs layout={data.tabsLayout} />
+      <LandingTabs />
       <Footer/>
       <StickyBanner heading={data.stickyBanner.heading} buttons={data.stickyBanner.buttons}/>
     </MiniModeProvider>
