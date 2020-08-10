@@ -1,5 +1,6 @@
 import React from "react";
 import { MiniModeConsumer } from "../../../context/MiniMode";
+import getTabsLayout from '../../../repositories/getTabsLayout';
 import {
   TabUser as Tab1,
   TabDevices as Tab2,
@@ -7,19 +8,20 @@ import {
 } from ".";
 import { Tabs } from "../../../components/Tabs";
 
-const layout = [
-  { tabTitle: "Subscription", tabIcon: "user", index: 0, tabContent: <Tab1 /> },
-  { tabTitle: "Devices", tabIcon: "devices", index: 1, tabContent: <Tab2 /> },
-  { tabTitle: "Download", tabIcon: "download", index: 2, tabContent: <Tab3 /> }
-];
+const TAB_CONTENTS = [<Tab1 />, <Tab2 />, <Tab3 />];
 
-const miniModeLayout = [
-  { tabTitle: "Subscription", tabIcon: "user", index: 0, tabContent: <Tab1 /> },
-  { tabTitle: "Download", tabIcon: "download", index: 2, tabContent: <Tab3 /> }
-];
+const assignLayoutToTabContent = (layout) => {
+  return layout.map(tab => {
+    return {
+      ...tab,
+      tabContent: TAB_CONTENTS[tab.index]
+    }
+  });
+}
 
 const getLayout = (miniMode) => {
-  return miniMode.active ? miniModeLayout : layout;
+  const selectedLayout = getTabsLayout(miniMode.active);
+  return assignLayoutToTabContent(selectedLayout);
 }
 
 const LandingTabs = () => {
