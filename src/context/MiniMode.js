@@ -16,7 +16,7 @@ class MiniModeProvider extends Component {
 	render () {
 		const context = {
 			active: this.state.active,
-			toggle: () => this.toggle()
+			toggle: this.toggle.bind(this)
 		};
 		return <Provider value={context}>{ this.props.children }</Provider>;
 	}
