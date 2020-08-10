@@ -55,45 +55,41 @@ class Tabs extends Component {
     };
   }
 
-  selectTab = async (tab, index) => {
-    const selectedTab = await getMemoizedTab(index);
+  selectTab = async (tab) => {
+    const selectedTab = await getMemoizedTab(tab.index);
 
     this.setState({ selectedTab, loadingContent: false });
     this.props.onTabSelected && this.props.onTabSelected(tab);
   }
 
-  handleClick(tab, index) {
+  handleClick(tab) {
     this.setState({ loadingContent: true });
-    this.selectTab(tab, index);
+    this.selectTab(tab);
   }
 
-  isTabActive(tabIndex) {
+  isTabActive({ index }) {
     const { loadingContent, selectedTab } = this.state;
 
-    return !loadingContent && (selectedTab === tabIndex);
-  }
-
-  isTabVisible(tab, miniModeActive) {
-    return !miniModeActive || tab.visibleInMiniMode;
+    return !loadingContent && (selectedTab === index);
   }
 
   getSelectedTab(layout) {
-    return layout[this.state.selectedTab] || layout[0];
+    return layout.find(tab => tab.index === this.state.selectedTab) || layout[0];
   }
 
   render() {
-    const { layout, size, miniModeActive } = this.props;
+    const { layout, size } = this.props;
     const TabContent = () => this.getSelectedTab(layout).tabContent;
 
     return (
       <TabsContainerStyled>
         <TabListStyled size={size}>
-          {layout.map((tab, index) => this.isTabVisible(tab, miniModeActive) && (
+          {layout.map((tab) => (
             <Tab
-              isActive={this.isTabActive(index)}
+              isActive={this.isTabActive(tab)}
               key={tab.tabTitle}
               label={tab.tabTitle}
-              onClick={() => this.handleClick(tab, index)}
+              onClick={() => this.handleClick(tab)}
               icon={tab.tabIcon}
             />
           ))}
