@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MiniModeProvider } from "../context/MiniMode";
+import getStickyBanner from '../repositories/getStickyBanner';
 import LandingHeader from "../components/Landing/Header";
 import Footer from "../components/Footer";
 import Hero from "../components/Landing/Hero";
@@ -9,48 +10,7 @@ import Promo from "../components/Landing/Promo";
 import StickyBanner from "../components/StickyBanner";
 import { LandingTabs } from "../components/Landing/Tabs";
 
-const stickyBanner = {
-  heading: {
-    title: "Start your free trial. Sign up with:",
-    rank: 5,
-    size: "default"
-  },
-  mobileHeading: {
-    title: "Signup",
-    rank: 5,
-    size: "default"
-  },
-  buttons: {
-    full: [{
-      label: "Email",
-      icon: "email",
-      buttonType: "secondary",
-      ariaLabel: "Email"
-    }, {
-      label: "Mobile",
-      icon: "phone",
-      buttonType: "primary",
-      ariaLabel: "Mobile"
-    }, {
-      label: "Facebook",
-      icon: "facebook",
-      buttonType: "primary",
-      ariaLabel: "Facebook",
-      backgroundColor: "#4760a0"
-    }],
-    mini: [{
-      label: "Email",
-      icon: "email",
-      buttonType: "secondary",
-      ariaLabel: "Email"
-    }, {
-      label: "Mobile",
-      icon: "phone",
-      buttonType: "primary",
-      ariaLabel: "Mobile"
-    }]
-  }
-};
+const stickyBanner = getStickyBanner();
 
 const Landing = () => {
   return (
