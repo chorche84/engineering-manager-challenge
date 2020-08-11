@@ -1,7 +1,7 @@
 import React from "react";
-import { MenuStyled, NavStyled, NavItemStyled, LinkStyled, StickyBannerStyled } from "./styles/Styled";
+import { MenuStyled, NavStyled, NavItemStyled, LinkStyled } from "./styles/Styled";
 
-const Menu = ({ className, isOpened, stickyBanner }) => {
+const Menu = ({ className, isOpened, children }) => {
   return (
     <MenuStyled className={className} isOpened={isOpened}>
       <NavStyled>
@@ -12,7 +12,7 @@ const Menu = ({ className, isOpened, stickyBanner }) => {
           <LinkStyled href="">Login</LinkStyled>
         </NavItemStyled>
       </NavStyled>
-      <StickyBannerStyled heading={stickyBanner.mobileHeading} buttons={stickyBanner.buttons}/>
+      { children }
     </MenuStyled>
   );
 };

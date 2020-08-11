@@ -3,6 +3,7 @@ import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
 import { HeaderStyled, BurgerStyled, ListStyled, EmptyDropdownStyled } from "./styles/Styled";
+import { StickyBannerStyled } from "../Menu/styles/Styled";
 
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -31,7 +32,9 @@ function Header(props) {
         onClick={handleOpened}
         ariaLabel={label}
       />
-      <Menu isOpened={isBurgerMenuOpen} stickyBanner={stickyBanner}/>
+      <Menu isOpened={isBurgerMenuOpen}>
+        <StickyBannerStyled heading={stickyBanner.mobileHeading} buttons={stickyBanner.buttons}/>
+      </Menu>
       <Logo />
       <nav>
         <ListStyled data={list} link/>
