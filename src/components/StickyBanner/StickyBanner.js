@@ -6,7 +6,7 @@ import {
 } from "./styles/Styled";
 
 function StickyBanner(props) {
-  const { className, heading, buttons, miniMode } = props;
+  const { className, heading, buttons } = props;
 
   function showButtons(buttonList) {
     return buttonList && buttonList.map(button => (
@@ -31,7 +31,7 @@ function StickyBanner(props) {
         />
       )}
 
-      {showButtons(miniMode && miniMode.active ? buttons.mini : buttons.full)}
+      {showButtons(buttons)}
     </StickyBannerStyled>
   );
 }

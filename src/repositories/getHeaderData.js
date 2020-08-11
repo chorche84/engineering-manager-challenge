@@ -43,7 +43,7 @@ const header = {
 };
 
 const getListForSelectedMode = (list, miniModeActive) => {
-  return miniModeActive ? header.list.mini : header.list.full;
+  return miniModeActive ? list.mini : list.full;
 }
 
 const getHeaderData = (miniModeActive) => {

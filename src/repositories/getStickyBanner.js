@@ -41,8 +41,15 @@ const stickyBanner = {
   }
 };
 
-const getStickyBanner = () => {
-  return stickyBanner;
+const getButtonsForSelectedMode = (buttons, miniModeActive) => {
+  return miniModeActive ? buttons.mini : buttons.full;
+}
+
+const getStickyBanner = (miniModeActive) => {
+  return {
+    ...stickyBanner,
+    buttons: getButtonsForSelectedMode(stickyBanner.buttons, miniModeActive)
+  };
 };
 
 export default getStickyBanner;
