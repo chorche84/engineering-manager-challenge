@@ -1,16 +1,19 @@
 import React from "react";
 import { MiniModeConsumer } from "../../../context/MiniMode";
+import getStickyBanner from '../../../repositories/getStickyBanner';
 import StickyBanner from "../../../components/StickyBanner";
 
-function LandingStickyBanner(props) {
-  const { heading, buttons } = props;
-
+function LandingStickyBanner() {
   return (
     <MiniModeConsumer>
       {
-        miniMode => (
-          <StickyBanner heading={heading} buttons={buttons} miniMode={miniMode} />
-        )
+        miniMode => {
+          const { heading, buttons } = getStickyBanner(miniMode.active);
+
+          return (
+            <StickyBanner heading={heading} buttons={buttons} />
+          )
+        }
       }
     </MiniModeConsumer>
   );

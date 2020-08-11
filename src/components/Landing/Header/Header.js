@@ -1,6 +1,7 @@
 import React from "react";
 import { MiniModeConsumer } from "../../../context/MiniMode";
 import getHeaderData from '../../../repositories/getHeaderData';
+import getStickyBanner from '../../../repositories/getStickyBanner';
 import Header from "../../../components/Header";
 
 function adaptList(list, miniMode) {
@@ -13,21 +14,22 @@ function adaptList(list, miniMode) {
   return adaptedList;
 }
 
-function adaptProps (props, header, miniMode) {
+function adaptProps (header, stickyBanner, miniMode) {
   return {
-    ...props,
     ...header,
+    stickyBanner,
     list: adaptList(header.list, miniMode),
     showEmptyDropdown: miniMode.active
   };
 }
 
-const LandingHeader = (props) => {
+const LandingHeader = () => {
   return (
     <MiniModeConsumer>
       { miniMode => {
           const header = getHeaderData(miniMode.active);
-          const adaptedProps = adaptProps(props, header, miniMode);
+          const stickyBanner = getStickyBanner(miniMode.active);
+          const adaptedProps = adaptProps(header, stickyBanner, miniMode);
 
           return (<Header { ...adaptedProps } />);
         }

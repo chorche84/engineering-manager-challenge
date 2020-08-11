@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { MiniModeProvider } from "../context/MiniMode";
-import getStickyBanner from '../repositories/getStickyBanner';
 import LandingHeader from "../components/Landing/Header";
 import Footer from "../components/Footer";
 import Hero from "../components/Landing/Hero";
@@ -10,12 +9,10 @@ import Promo from "../components/Landing/Promo";
 import LandingStickyBanner from "../components/Landing/StickyBanner";
 import { LandingTabs } from "../components/Landing/Tabs";
 
-const stickyBanner = getStickyBanner();
-
 const Landing = () => {
   return (
     <MiniModeProvider>
-      <LandingHeader stickyBanner={stickyBanner}/>
+      <LandingHeader />
       <Hero
         background={"/images/starzplay_covers"}
         heroTitle="Imagine the best entertainment all in one place"
@@ -38,7 +35,7 @@ const Landing = () => {
       />
       <LandingTabs />
       <Footer/>
-      <LandingStickyBanner heading={stickyBanner.heading} buttons={stickyBanner.buttons}/>
+      <LandingStickyBanner />
     </MiniModeProvider>
   );
 };
