@@ -1,80 +1,36 @@
 import React from "react";
 import { MiniModeConsumer } from "../../../context/MiniMode";
+import getHeaderData from '../../../repositories/getHeaderData';
 import Header from "../../../components/Header";
 
-const header = {
-  label: "Menu",
-  list: {
-    full: {
-      explore: {
-        text: "Explore",
-        url: "#",
-        role: "link"
-      },
-      toggleMiniMode: {
-        text: "Toggle Mini Mode",
-        url: "#",
-        role: "button"
-      }
-    },
-    mini: {
-      toggleMiniMode: {
-        text: "Toggle Mini Mode",
-        url: "#",
-        role: "button"
-      }
-    }
-  },
-  dropDown: {
-    items:[
-      {
-        content: "English",
-        value: "en"
-      },
-      {
-        content: "العربية",
-        value: "ar"
-      },
-      {
-        content: "Français",
-        value: "fr"
-      }
-    ],
-    selectedItem: 0,
-    icon: "languageGlobe",
-    optionsPosition: "center"
-  }
-};
-
 function adaptList(list, miniMode) {
-  const adaptedList = miniMode.active ? list.mini : list.full;
+  let adaptedList = { ...list };
 
   if (adaptedList.toggleMiniMode) {
-    adaptedList.toggleMiniMode.onClick = miniMode.toggle;
+    adaptedList.toggleMiniMode = { ...adaptedList.toggleMiniMode, onClick: miniMode.toggle };
   }
 
   return adaptedList;
 }
 
 function adaptProps (props, header, miniMode) {
-  const adaptedList = adaptList(header.list, miniMode);
-
   return {
     ...props,
     ...header,
-    list: adaptedList,
+    list: adaptList(header.list, miniMode),
     showEmptyDropdown: miniMode.active
   };
 }
 
-function LandingHeader(props) {
-
+const LandingHeader = (props) => {
   return (
     <MiniModeConsumer>
       { miniMode => {
-      	  const adaptedProps = adaptProps(props, header, miniMode);
-	        return (<Header { ...adaptedProps } />);
-	      }
+          const header = getHeaderData(miniMode.active);
+          const adaptedProps = adaptProps(props, header, miniMode);
+
+          return (<Header { ...adaptedProps } />);
+        }
       }
     </MiniModeConsumer>
   );
