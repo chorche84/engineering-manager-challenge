@@ -1,5 +1,4 @@
 import React from "react";
-import { MiniModeConsumer } from "../../context/MiniMode";
 import {
   ButtonStyled,
   HeadingStyled,
@@ -7,7 +6,7 @@ import {
 } from "./styles/Styled";
 
 function StickyBanner(props) {
-  const { className, heading, buttons } = props;
+  const { className, heading, buttons, miniMode } = props;
 
   function showButtons(buttonList) {
     return buttonList && buttonList.map(button => (
@@ -22,24 +21,18 @@ function StickyBanner(props) {
   }
 
   return (
-    <MiniModeConsumer>
-      {
-        miniMode => (
-          <StickyBannerStyled className={className}>
-            {heading.title && (
-              <HeadingStyled
-                rank={heading.rank}
-                text={heading.title}
-                size={heading.size}
-                ariaLabelledby={heading.title}
-              />
-            )}
+    <StickyBannerStyled className={className}>
+      {heading.title && (
+        <HeadingStyled
+          rank={heading.rank}
+          text={heading.title}
+          size={heading.size}
+          ariaLabelledby={heading.title}
+        />
+      )}
 
-            {showButtons(miniMode.active ? buttons.mini : buttons.full)}
-          </StickyBannerStyled>
-        )
-      }
-    </MiniModeConsumer>
+      {showButtons(miniMode && miniMode.active ? buttons.mini : buttons.full)}
+    </StickyBannerStyled>
   );
 }
 

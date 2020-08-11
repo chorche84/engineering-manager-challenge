@@ -7,7 +7,7 @@ import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
 import Trending from "../components/Landing/Trending";
 import Promo from "../components/Landing/Promo";
-import StickyBanner from "../components/StickyBanner";
+import LandingStickyBanner from "../components/Landing/StickyBanner";
 import { LandingTabs } from "../components/Landing/Tabs";
 
 const stickyBanner = getStickyBanner();
@@ -38,7 +38,7 @@ const Landing = () => {
       />
       <LandingTabs />
       <Footer/>
-      <StickyBanner heading={stickyBanner.heading} buttons={stickyBanner.buttons}/>
+      <LandingStickyBanner heading={stickyBanner.heading} buttons={stickyBanner.buttons}/>
     </MiniModeProvider>
   );
 };
