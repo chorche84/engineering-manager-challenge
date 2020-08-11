@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Burger from "../../Burger/Burger";
 import List from "../../List/List";
+import StickyBanner from "../../StickyBanner";
 import { media } from "../../../styles/media";
 
 export const HeaderStyled = styled.header`
@@ -41,4 +42,11 @@ export const ListStyled = styled(List)`
 export const EmptyDropdownStyled = styled.div`
   width: 80px;
   height: 36px;
+`;
+
+export const StickyBannerStyled = styled(StickyBanner)`
+  border-top: 0;
+  > div {
+    flex-direction: column;
+  }
 `;

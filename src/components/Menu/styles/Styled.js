@@ -1,6 +1,5 @@
 // Menu.styled.js
 import styled, { css, keyframes } from "styled-components";
-import StickyBanner from "../../StickyBanner";
 
 const TIME_SHOWHIDE_MENU = 0.4;
 
@@ -65,12 +64,5 @@ export const LinkStyled = styled.a`
   font-size: ${props => props.theme.font.size.medium};
   &:hover {
     font-weight: ${props => props.theme.font.weight.bold};
-  }
-`;
-
-export const StickyBannerStyled = styled(StickyBanner)`
-  border-top: 0;
-  > div {
-    flex-direction: column;
   }
 `;

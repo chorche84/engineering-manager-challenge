@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
-import { HeaderStyled, BurgerStyled, ListStyled, EmptyDropdownStyled } from "./styles/Styled";
-import { StickyBannerStyled } from "../Menu/styles/Styled";
+import { HeaderStyled, BurgerStyled, ListStyled, EmptyDropdownStyled, StickyBannerStyled } from "./styles/Styled";
 
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
