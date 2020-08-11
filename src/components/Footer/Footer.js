@@ -3,7 +3,7 @@ import { MiniModeConsumer } from "../../context/MiniMode";
 import FooterNav from "../FooterNav";
 import { FooterStyled, LogoStyled, AppLogosStyled } from "./styles/Styled";
 
-function Footer() {
+function Footer({ miniMode }) {
   const currentYear = new Date().getFullYear();
 
   function showAppLogos (showMiniMode) {
@@ -13,20 +13,14 @@ function Footer() {
   }
 
   return (
-    <MiniModeConsumer>
-      {
-        miniMode => (
-          <FooterStyled>
-            <FooterNav />
-            { showAppLogos(miniMode.active) }
-            <div>
-              <small>© {currentYear}</small>
-              <LogoStyled />
-            </div>
-          </FooterStyled>
-        )
-      }
-    </MiniModeConsumer>
+    <FooterStyled>
+      <FooterNav />
+      { showAppLogos(miniMode.active) }
+      <div>
+        <small>© {currentYear}</small>
+        <LogoStyled />
+      </div>
+    </FooterStyled>
   );
 }
 

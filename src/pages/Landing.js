@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MiniModeProvider } from "../context/MiniMode";
 import LandingHeader from "../components/Landing/Header";
-import Footer from "../components/Footer";
+import LandingFooter from "../components/Landing/Footer";
 import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
 import Trending from "../components/Landing/Trending";
@@ -34,7 +34,7 @@ const Landing = () => {
         direction="start"
       />
       <LandingTabs />
-      <Footer/>
+      <LandingFooter/>
       <LandingStickyBanner />
     </MiniModeProvider>
   );
