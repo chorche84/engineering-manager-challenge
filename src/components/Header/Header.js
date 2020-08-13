@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
-import { HeaderStyled, BurgerStyled, ListStyled, EmptyDropdownStyled, StickyBannerStyled } from "./styles/Styled";
+import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
 
 function Header(props) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const { dropDown, list, label, stickyBanner, showEmptyDropdown } = props;
+  const { dropDown, list, label, stickyBanner, menuContent, rightContent } = props;
 
   useEffect(() => {
     document.body.classList.toggle("noScrolling", isBurgerMenuOpen);
@@ -14,14 +13,6 @@ function Header(props) {
 
   function handleOpened() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-  }
-
-  function showDropdown (dropDown, showEmptyDropdown) {
-    if (showEmptyDropdown) {
-      return <EmptyDropdownStyled />;
-    } else {
-      return <Dropdown {...dropDown}/>;
-    }
   }
 
   return (
@@ -32,12 +23,12 @@ function Header(props) {
         ariaLabel={label}
       />
       <Menu isOpened={isBurgerMenuOpen}>
-        <StickyBannerStyled heading={stickyBanner.mobileHeading} buttons={stickyBanner.buttons}/>
+        { menuContent }
       </Menu>
       <Logo />
       <nav>
         <ListStyled data={list} link/>
-        { showDropdown(dropDown, showEmptyDropdown) }
+        { rightContent }
       </nav>
     </HeaderStyled>
   );

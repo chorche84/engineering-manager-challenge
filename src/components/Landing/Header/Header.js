@@ -2,7 +2,9 @@ import React from "react";
 import { MiniModeConsumer } from "../../../context/MiniMode";
 import getHeaderData from '../../../repositories/getHeaderData';
 import getStickyBanner from '../../../repositories/getStickyBanner';
-import Header from "../../../components/Header";
+import Header from "../../Header";
+import { Dropdown } from "../../Dropdown";
+import { StickyBannerStyled, EmptyDropdownStyled } from  "../../Header/styles/Styled";
 
 function adaptList(list, miniMode) {
   let adaptedList = { ...list };
@@ -14,12 +16,24 @@ function adaptList(list, miniMode) {
   return adaptedList;
 }
 
+function getMenuContentComponent ({mobileHeading, buttons}) {
+  return <StickyBannerStyled heading={mobileHeading} buttons={buttons} />;
+}
+
+function getRightContentComponent (header, miniMode) {
+  if (miniMode.active) {
+    return <EmptyDropdownStyled />;
+  } else {
+    return <Dropdown {...header.dropDown} />;
+  }
+}
+
 function adaptProps (header, stickyBanner, miniMode) {
   return {
     ...header,
-    stickyBanner,
     list: adaptList(header.list, miniMode),
-    showEmptyDropdown: miniMode.active
+    menuContent: getMenuContentComponent(stickyBanner),
+    rightContent: getRightContentComponent(header, miniMode)
   };
 }
 
