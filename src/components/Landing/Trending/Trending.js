@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Promo from "../Promo";
 import LoadingSpinner from "../../LoadingSpinner";
+import getTrendingData from '../../../repositories/getTrendingData';
 import { getWhatsTrendingImage } from '../../../repositories/getWhatsTrendingImage';
 
 class Trending extends Component {
@@ -16,11 +17,13 @@ class Trending extends Component {
   }
 
   render () {
+    const { title, alt } = getTrendingData();
+
     return (
-      <Promo title="Whats trending " size={"xlarge"}>
+      <Promo title={title} size={"xlarge"}>
         { this.state.imageUrl ? (
             <picture>
-              <img src={this.state.imageUrl} alt="What's trending" />
+              <img src={this.state.imageUrl} alt={alt} />
             </picture>
           ) : (
             <LoadingSpinner />
