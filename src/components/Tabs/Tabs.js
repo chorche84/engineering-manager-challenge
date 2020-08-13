@@ -7,7 +7,7 @@ import {
   IconStyled,
   LabelStyled
 } from "./styles/Styled";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "components/LoadingSpinner";
 
 async function calculateTabToShow(tab) {
   await new Promise(resolve => setTimeout(resolve, 5000));

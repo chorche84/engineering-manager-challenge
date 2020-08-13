@@ -1,6 +1,6 @@
 import React from "react";
-import { MiniModeConsumer } from "../../../context/MiniMode";
-import getTabsLayout from '../../../repositories/getTabsLayout';
+import { MiniModeConsumer } from "context/MiniMode";
+import getTabsLayout from 'repositories/getTabsLayout';
 import {
   TabUser as Tab1,
   TabDevices as Tab2,

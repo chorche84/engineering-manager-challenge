@@ -1,6 +1,6 @@
 import React from "react";
 import { TabContentStyled, HeadingStyled, ImgDownload } from "./styles/Styled";
-import { Text } from "../../Text";
+import { Text } from "components/Text";
 import downloadImage from "./images/download_en.png";
 
 const TabDownload = () => (

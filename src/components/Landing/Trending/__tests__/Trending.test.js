@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import * as repository from '../../../../repositories/getWhatsTrendingImage';
+import * as repository from 'repositories/getWhatsTrendingImage';
 import Trending from '../Trending';
 
 configure({adapter: new Adapter()});

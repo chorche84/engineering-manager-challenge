@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Promo from "../Promo";
-import LoadingSpinner from "../../LoadingSpinner";
-import getTrendingData from '../../../repositories/getTrendingData';
-import { getWhatsTrendingImage } from '../../../repositories/getWhatsTrendingImage';
+import LoadingSpinner from "components/LoadingSpinner";
+import getTrendingData from 'repositories/getTrendingData';
+import { getWhatsTrendingImage } from 'repositories/getWhatsTrendingImage';
 
 class Trending extends Component {
   constructor (props) {

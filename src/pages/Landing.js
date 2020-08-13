@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { MiniModeProvider } from "../context/MiniMode";
-import LandingHeader from "../components/Landing/Header";
-import LandingFooter from "../components/Landing/Footer";
-import Hero from "../components/Landing/Hero";
-import WeAre from "../components/Landing/WeAre";
-import Trending from "../components/Landing/Trending";
-import Promo from "../components/Landing/Promo";
-import LandingStickyBanner from "../components/Landing/StickyBanner";
-import { LandingTabs } from "../components/Landing/Tabs";
+import { MiniModeProvider } from "context/MiniMode";
+import LandingHeader from "components/Landing/Header";
+import LandingFooter from "components/Landing/Footer";
+import Hero from "components/Landing/Hero";
+import WeAre from "components/Landing/WeAre";
+import Trending from "components/Landing/Trending";
+import Promo from "components/Landing/Promo";
+import LandingStickyBanner from "components/Landing/StickyBanner";
+import { LandingTabs } from "components/Landing/Tabs";
 
 const Landing = () => {
   return (

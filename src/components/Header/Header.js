@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Menu from "../Menu";
-import { Logo } from "../Logo";
+import Menu from "components/Menu";
+import { Logo } from "components/Logo";
 import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
 
 function Header(props) {

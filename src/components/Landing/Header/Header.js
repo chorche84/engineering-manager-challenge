@@ -1,10 +1,10 @@
 import React from "react";
-import { MiniModeConsumer } from "../../../context/MiniMode";
-import getHeaderData from '../../../repositories/getHeaderData';
-import getStickyBanner from '../../../repositories/getStickyBanner';
-import Header from "../../Header";
-import { Dropdown } from "../../Dropdown";
-import { StickyBannerStyled, EmptyDropdownStyled } from  "../../Header/styles/Styled";
+import { MiniModeConsumer } from "context/MiniMode";
+import getHeaderData from 'repositories/getHeaderData';
+import getStickyBanner from 'repositories/getStickyBanner';
+import { Dropdown } from "components/Dropdown";
+import Header from "components/Header";
+import { StickyBannerStyled, EmptyDropdownStyled } from  "components/Header/styles/Styled";
 
 function adaptList(list, miniMode) {
   let adaptedList = { ...list };
