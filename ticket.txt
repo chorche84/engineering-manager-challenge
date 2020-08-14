@@ -1,0 +1,43 @@
+Title:
+
+	Landing Page Tabs
+
+
+Description:
+
+	*Context*
+
+		In order to display several information to the user in the Landing Page, we want to use some tabs for it. This Tabs element is going to display 'Subscription', 'Devices' and 'Download' data.
+		When a Tab is selected, whe want to display its content below.
+		You can find the mockups in this link: [fake link].
+
+	*Acceptance Criteria*
+
+		- As a user, when I load the Landing Page, with Mini Mode deactivated:
+			- I want to see the tabs element located between the Promo banners and the Footer.
+			- I want to see the tabs element composed by the 'Subscription', 'Devices' and 'Download' tabs in the upper side, and the currently selected tab content in the lower side.
+			- I want to see the first tab ('Subscription') selected, and then its content in the lower side.
+
+		- As a user, when I load the Landing Page, with Mini Mode activated:
+			- I want to see the tabs element located between the Promo banners and the Footer.
+			- I want to see the tabs element composed by the 'Subscription', and 'Download' tabs in the upper side (but not the 'Devices' one), and the currently selected tab content in the lower side.
+			- I want to see the first tab ('Subscription') selected, and then its content in the lower side.
+
+		- As a user, when I click on any Tab:
+			- If it's the currently selected one: I want nothing to change.
+			- If it's not the currently selected one:
+				- I want to see the clicked tab selected (highlighted).
+				- I want to see the previously selected tab unselected (unhighlighted).
+				- Before the tab content is ready: I want to see a loading effect in the lower side of the tabs element (see mockups), replacing the previously displayed content.
+				- Once the tab content is ready: I want to see it in the lower side of the tabs element, replacing whatever was displayed there before.
+
+	*Technical notes*
+
+		As our Landing Page is fully based on React, we want this tabs element to be a React component.
+
+		As a developer, these are the technical Acceptance Criteria:
+		- As a result of this task, I want to obtain a generic Tabs component reusable in any other page or context.
+		- As a result of this task, I want to customize the previously mentioned generic Tabs component for the Landing Page specific purpose.
+		- As a result of this task, when a tab is clicked, I don't want the full component to be reloaded, but just the elements that are actually changing.
+
+		Each tab content is provided by this service: [a service link and its API explanation].
