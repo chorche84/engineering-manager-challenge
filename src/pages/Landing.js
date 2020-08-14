@@ -11,7 +11,7 @@ import { LandingTabs } from "components/Landing/Tabs";
 
 const Landing = () => {
   return (
-    <MiniModeProvider>
+    <MiniModeProvider value={false}>
       <LandingHeader />
       <Hero
         background={"/images/starzplay_covers"}

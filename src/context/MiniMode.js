@@ -3,7 +3,14 @@ import React, { Component } from "react";
 const { Provider, Consumer } = React.createContext({});
 
 class MiniModeProvider extends Component {
-	state = {
+	constructor(props) {
+		super(props);
+		this.state = {
+			active: props.value
+		};
+	}
+
+	state: {
 		active: false
 	};
 
