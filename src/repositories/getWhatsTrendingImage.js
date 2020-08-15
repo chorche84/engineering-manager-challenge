@@ -1,5 +1,7 @@
 const SERVICE_URL = 'http://localhost:7000';
 
-export function getWhatsTrendingImage () {
+const getWhatsTrendingImage = () => {
     return fetch(SERVICE_URL).then((response) => response.text());
 }
+
+export default getWhatsTrendingImage;

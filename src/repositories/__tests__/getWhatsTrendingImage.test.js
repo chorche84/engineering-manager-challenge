@@ -1,4 +1,4 @@
-import { getWhatsTrendingImage } from '../getWhatsTrendingImage';
+import getWhatsTrendingImage from '../getWhatsTrendingImage';
 
 it('returns the what\'s trending image from the server', (done) => {
 	const trendingImageUrl = 'any trending image url';

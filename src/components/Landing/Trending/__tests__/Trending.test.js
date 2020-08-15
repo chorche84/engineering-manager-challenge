@@ -1,12 +1,16 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import * as repository from 'repositories/getWhatsTrendingImage';
+import getWhatsTrendingImage from 'repositories/getWhatsTrendingImage';
 import Trending from '../Trending';
 
 configure({adapter: new Adapter()});
 
-jest.spyOn(repository, 'getWhatsTrendingImage' );
+const imageUrl = 'any image url';
+const serviceResponsePromise = Promise.resolve(imageUrl);
+
+jest.mock('repositories/getWhatsTrendingImage');
+getWhatsTrendingImage.mockImplementation(() => serviceResponsePromise);
 
 it('before loading the trending image, it renders the trending component with the loading spinner', () => {
 	const trending = shallow(<Trending />);
@@ -18,11 +22,6 @@ it('before loading the trending image, it renders the trending component with th
 });
 
 it('after loading the trending image, it renders the image', done => {
-	const imageUrl = 'any image url';
-	const serviceResponsePromise = Promise.resolve(imageUrl);
-
-	repository.getWhatsTrendingImage.mockReturnValueOnce(serviceResponsePromise);
-
 	const trending = shallow(<Trending />);
 
 	serviceResponsePromise.then(() => {
