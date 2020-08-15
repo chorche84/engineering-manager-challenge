@@ -6,7 +6,7 @@ import {
   TabDevices as Tab2,
   TabDownload as Tab3
 } from ".";
-import { Tabs } from "../../../components/Tabs";
+import { Tabs } from "components/Tabs";
 
 const TAB_CONTENTS = [<Tab1 />, <Tab2 />, <Tab3 />];
 
