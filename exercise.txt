@@ -1,0 +1,83 @@
+- What's trending:
+
+	-- I've created a file called getWhatsTrendingImage inside a new repositories folder, to retrieve the image. It's just doing a fetch to the service, but I prefer to keep the logic interacting with repositories isolated from components, so they are abstracted about how data is retrieved (you'll see that I've done the same thing for other data sources)
+
+	-- Inside the Trending component I'm calling to this function to retrieve the image url, and then update the state. While the state is has this image url, it's loaded in the component.
+
+	-- While the image url is not inside the state, a new LoadingSpinner component is displayed instead the image: I think that it provides a better user experience than just keep this slot empty and suddenly display the image.
+
+	-- The Trending image is currently coupled to the getWhatsTrendingImage file. I presume that, being Trending inside the Landing folder, this is a specific component for the landing page (I've taken this presuntion later for other components). This means that there's no need to keep a reusable Trending component, so this coupling is not a big issue. Now, if I were wrong and components inside Landing folder are not landing specific, then I should avoid this coupling, probably passing getWhatsTrendingImage as a prop instead of importing it directly.
+
+	-- I presume that the trending texts can change depending on the language, so it's not good having them defined inline in the component. Now I'm getting them from a repository file (that is currently returning the English texts anyway, but it can be modified to access to a repository whose texts depends on the language
+	-- Things I would like to improve:
+		-- As I cannot know in advanced the height that the image is going to have (unless cheating), I need to give a height to the LoadingSpinner that probably is not going to match to the actual image height, producing a jump when it's loaded. In a real life scenario, I would try to clarify if the image is always going to have the same height, and then I would adapt the LoadingSpinner one to it.
+		-- Related to the previous point, in a real life scenario I would have a discussion with the UX team, trying to find if there's any kind of placeholder matching better to the image, that we could use instead of LoadinSpinner.
+		-- Again in a real life scenario, I would start a discussion about what should be the behaviour if the request to the service fails. Maybe displaying a default what's trending image?
+
+
+
+- Tabs component:
+
+	-- I've created a memoizer encapsulating calculateTabToShow. I that way, the tab to show is calculated just once by click.
+
+	-- I've splited the Tabs component in 2 components, extracting all the specific tabs logic and data from the Landing component:
+		-- The already existing Tabs component, responsible only to render the tabs
+		-- LandingTabs component, responsible of retrieving the data to be rendered by Tabs
+	The fact that calculateTabToShow uses the index, and I'm not allow to change it, has driven me to create a 'fake' index prop to each tab. Otherwise, after memoizing the tabs, switching to mini mode would made the download tab to be in the second position (it was in the third one before), so the calculated tab for it would be the one for the second position, which is the devices one.
+	I've also extract the retrieval of the tabs data to its specific repository function, just to split this responsibility from the one to pass the right data to the Tabs component. I presume that those values might change, specially the labels, that depends on the language, so it's better not to have them inline in the component code.
+
+	-- A LoadingSpinner component is displayed while the selected tab content is being calculated. This gives the user an inmediate feedback after his interaction, showing him that something is happening. As the selected tab is not supposed to be known before calculateTabToShow, I'm not supposed to know whitch is the tab that I have to select (although it's obviously the clicked one); that's why I've chosen to deselect all of them while the selected tab is being calulated: I think that this is better than keep selected the previous one.
+
+	-- I've turned Tab component into a React.Component element with a shouldComponentUpdate method, in order to avoid unneded re renderers
+
+	-- Things I would like to improve, but I don't know if I can due to the exercise context:
+		-- Depending on the user behavour with tabs, we could consider to precalculate the tabs to show from the beginning. In that way the display of the selected tab after clicking on it should be faster, providing a better user experience.
+		I have not implemented it, as calculateTabToShow is supposed to be a resource consumer operation (am I wrong?), so I've prioritised the first load of the page to a later interaction with tabs.
+		-- I would not use the index as the entry parameter for calculateTabToShow. This is not a deterministic parameter to retrive the tab, and this can be problematic.
+		Actually, if I use just a 2 items tab array for the mini mode, it doesn't work (because the third tab is now in the second index, so it's calculating the second tab to show). This has forced me to use a solution I don't like at all for the mini mode.
+		If each tab had something like an id prop (I presume I cannot use label neither icon props, as they can change), I would use it as the parameter to calculate the selected tab.
+		-- Is "onTabSelected" really needed? If not, I would remove that line of code.
+		-- If we remove the "onTabSelected" line of code, the we'll be able to stop using an anonymous function for the onClick callback, and use this.handleClick directly: it would receive just the index (or whatever prop is needed to calculate the tab) from the Tab component. By avoiding this anonymous function we should inclrease performance a little bit.
+
+
+
+- Mini Mode:
+
+	-- In order to share the mini mode state through different components in multimple places in the component tree, I've used a context provider (all the context logic is encapsulated in the context/MiniMode file).
+	I've chosen this solution in order to avoid the state propagation through a lot of layers in the component tree. Then, after after some code restructure I did, all components managing mini mode are in the second level of the tree, so this solution is not so adventagous. I've kept it because, if in further developments or componet restructures some of those components are on lower levels, we'll not need to worry about prop drilling with the mini mode state. But, if the main components structure is never going to change, we could consider to move to a solution based on a state in the Landing component, sent to its inmediate child components.
+
+	-- The mini mode context provider exposes a toggle method to toggle its internal state. When this happens, all components using its consumer are update with the new mini mode value.
+
+	-- As I did with previous components, I've split the ones using mini mode in 2: one component for rendering, and another one to customize the previous one for the landing page, including everything needed to make mini mode work.
+
+	-- I've also presumed for some of those components that we don't want inline texts to be defined insided: it's not a good practice, specially if we want internationalitation. Because of this, I've created some files in the repository folder to retrieve this data, isolating this logic from the components. Then, this files are access not by the components in charge of rendering, but by the ones in charge of customezing the previous ones for the landing page.
+
+	-- In the specific case of sticky banner, I've extracted all the explicit button data from the component: now it's receiving it in the props, making it more reusable.
+
+	-- I did something similar to the previous point for the Header component: now its 'Explore' and 'Minimode' items, as well as its drop down items, are not defined inline, but received as props.
+
+
+
+- Tabs component ticket:
+
+	-- I've written it in a different file: ticket.txt.
+
+	-- Just two few clarifications:
+		-- I've presumed that the time spent in calculateTabToShow represents some kind of service interaction. That's why in the ticket I mention a url to that service and its API (althogh it's a placeholder, because ovbiously I have no data about this service neither its API).
+		-- A ticket like this should include mockups provided by UX; they are actually an acceptance criteria. I've presumed that I have an url linking those mockups, and I make reference to it in the ticket.
+		-- A task like this, requested probably by business/product, should have pure functional acceptance criteria, defined by the PO, the stakeholders, or the development team in collaboration with them. Then, in the refinement phase, the development team should extend the ticket description with any technical consideration that they think is relevant for the development. I've tried to reflect this in the ticket: you'll find a pure functional description at the beginning, and then some technical consideration, but both things are separated.
+
+
+
+- Other not related at all changes:
+
+	-- As I've mentioned before, I've tried to keeep the components as much generic and shareable as I can. So I've moved all the specific mini mode and landing props adaptations to new components inside the Landing folder (because I presume that this folder only contains specific Landing components, so they don't need to be shareable). In this way, some components have been split in 2: the generic and shareable one, made to render whatever it receives in props, and the landing custom one, made to send the landing props to the previous one.
+	I could have keep all the specific landing and minimode logic in the main Landing page component, instead of creating new landing components for this purpose, but then the main component would be too big and complex.
+
+	-- I've configured the project to be able to unit test the components, and I've defined unit tests for some few ones. You can run them with 'npm run test'.
+	I confess that I've been forced to add a couple of dev dependencies to the package.json to be able to run these tests. I know that it's been adviced not to add new dependencies, but there's no other way to do it.
+
+	-- I've created an .env file defining NODE_PATH=src. In this way, we can avoid a lot of relative paths in imports.
+
+
+
